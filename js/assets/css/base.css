@@ -1,0 +1,154 @@
+:root
+{
+    --gray-text: #313338;
+    --text: #3b5b5d;
+    --body-background: #f1f1f1;
+    --article-background: #fefefe;
+    --desc-text: #bab1ae;
+    --orange-color: #f25c2c;
+    --white-color: #fff;
+    --footer-background: #ffffff;
+    --header-background: #ffffff;
+}
+
+*
+{
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+    /* overflow-x: hidden; */
+}
+
+html
+{
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    animation: trasitionIn 0.4s;
+}
+
+@keyframes trasitionIn
+{
+    from 
+    {
+        opacity: 0;
+        transform:  translateY(-10px);
+    }
+
+    to 
+    {
+        opacity: 1;
+        transform:  translateY(0);
+    }
+}
+
+body
+{
+    width: 100%;
+}
+
+ul
+{
+    padding-left: 0;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+.d-flex
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-flex-col
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.d-flex-bet
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.d-flex-start
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.d-flex-end
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hidden
+{
+    display: none !important;
+}
+
+.slide-from-right
+{
+    /* position: absolute; */
+    right: 0px !important;
+    
+}
+
+.container
+{
+    /* padding-top: 100px; */
+    overflow-x: hidden;
+    width: 100%;
+    background-color: var(--body-background);
+    padding-bottom: 36px;
+}
+
+@media (max-width: 739px) {
+    .container
+    {
+        margin-top: 46px;
+    }
+}
+
+.app
+{
+    position: relative;
+}
+
+
+.light, .dark
+{
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    border-radius: 50px;
+    top: 100px;
+    left: 100px;
+}
+
+.toggle
+{
+    cursor: pointer;
+}
+
+.light
+{
+    background: #fafafa;
+}
+
+.light input, .dark input
+{
+    display: none;
+}

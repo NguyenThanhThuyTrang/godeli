@@ -1,0 +1,316 @@
+.footer
+{
+    width: 100%;
+    height: auto;
+    font-size: 1.8rem;
+    color: var(--gray-text);    
+    padding: 24px;
+    align-items: flex-start !important;
+    box-shadow: 0px 2px 2px #ccc;
+    background-color: var(--footer-background);
+}
+
+ul
+{
+    list-style: none;
+}
+
+.footer__left
+{
+    /* background-color: #ccc; */
+}
+
+.footer__logo
+{
+    
+}
+
+.footer__logo img
+{
+    width: 120px;
+    height: 120px;
+}
+
+.footer__contact
+{
+    margin-top: 36px;
+}
+
+.footer__contact h3
+{
+    font-size: 3rem;
+    line-height: 3rem;
+}
+
+.footer__contact a
+{
+    width: 100%;
+}
+
+.btn-contact
+{
+    margin-top: 24px;
+    padding: 16px;
+    width: 100%;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    outline: none;
+    border: 3px solid var(--gray-text);
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #fff;
+    color: var(--gray-text);
+}
+
+.btn-contact:hover
+{
+    color: #fff;
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+    transform-origin: top top;
+    transition: all ease-in .3s;
+}
+
+.footer__social
+{
+    margin-top: 36px;
+}
+
+.footer__social h3
+{
+    font-size: 3rem;
+    line-height: 3rem;
+}
+
+.social-list
+{
+    list-style: none;
+    margin-top: 16px;
+    padding-left: 16px;
+}
+
+.social-item
+{
+    font-size: 2.2rem;
+    line-height: 2.2rem;
+    margin-right: 32px;
+}
+
+.social-link
+{
+    color: var(--gray-text);
+}
+
+.social-link:hover
+{
+    color: var(--orange-color);
+}
+
+.social-icon
+{
+
+}
+
+/*FOOTER CENTER*/
+.footer__center
+{
+    margin-top: 160px;
+}   
+
+.footer__center-heading
+{
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+}
+
+.recipe-list
+{
+    margin-top: 16px;
+}
+
+.recipe-item
+{
+    margin-top: 16px;
+}
+
+.recipe-item:hover .recipe-link
+{
+    color: var(--orange-color);
+    /* border-bottom: 2px solid var(--orange-color); */
+}
+
+.recipe-link
+{
+    color: var(--gray-text);
+    font-weight: 500;
+}
+
+
+/*FOOTER RIGHT*/
+.footer__right
+{
+    justify-content: space-between;
+    margin-top: 160px;
+}
+
+.right-list
+{
+    align-items: flex-start !important;
+}
+
+.right-item
+{
+    margin-right: 84px;
+}
+
+
+.right-item h3
+{
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+}
+
+.right-item li a
+{
+    color: var(--gray-text);
+    font-weight: 500;
+}
+
+.right-item ul
+{
+    margin-top: 16px;
+}
+
+.right-item li
+{
+    margin-top: 16px;
+}
+
+.right-item li:hover .right-link
+{
+    color: var(--orange-color);
+    /* border-bottom: 2px solid var(--orange-color); */
+}
+
+.footer__lang
+{
+    margin-top: 64px;
+    padding: 12px;
+    width: 160px;
+    border: 2px solid var(--gray-text);
+    text-align: center;
+    cursor: pointer;
+}
+
+.footer__lang:hover
+{
+    color: #fff;
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+.cpr
+{
+    margin-top: 16px;
+    font-size: 1.4rem;
+}
+
+/* MOBILE */
+
+@media (max-width: 739px)
+{
+    .footer
+    {
+        display: block;
+    }
+
+    .footer__contact h3, .footer__social h3
+    {
+        font-size: 2.3rem;
+        line-height: 2.3rem;
+    }
+
+    .right-item h3, .footer__center-heading
+    {
+        font-size: 2rem;
+    }
+
+    .right-item li a, .recipe-link
+    {
+        font-size: 1.8rem;
+    }
+
+    .footer__right
+    {
+        display: block;
+    }
+
+    .footer__right, .footer__center
+    {
+        margin-top: 48px;
+    }
+
+    .right-item
+    {
+        margin-right: 16px;
+    }
+
+    .btn-contact
+    {
+        font-size: 1.6rem;
+    }
+}
+
+/* Mobile & Tablet */
+@media (max-width: 1023px)
+{
+
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px)
+{
+
+    .footer__contact h3, .footer__social h3
+    {
+        font-size: 2.3rem;
+        line-height: 2.3rem;
+    }
+
+    .right-item h3, .footer__center-heading
+    {
+        font-size: 2rem;
+    }
+
+    .right-item li a, .recipe-link
+    {
+        font-size: 1.8rem;
+    }
+
+    .footer__right, .footer__center
+    {
+        margin-top: 48px;
+    }
+
+    .right-item
+    {
+        margin-right: 16px;
+    }
+
+    .btn-contact
+    {
+        font-size: 1.6rem;
+    }
+
+    .footer iframe
+    {
+        width: 250px;
+        height: 200px;
+    }
+}
+
+/* > PC low resolution*/
+@media (min-width: 1024px) and (max-width: 1239px) 
+{
+
+}

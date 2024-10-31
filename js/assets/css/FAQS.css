@@ -1,0 +1,129 @@
+
+.container-tablet{
+	margin: 0 40px;
+	max-width: 1500px;
+	display: flex;
+	flex-direction: column;
+	gap: 35px;
+}
+
+.container-tablet .tab{
+	position: relative ;
+	background: #D1E6E6;
+	padding: 0 20px 20px;
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.container-tablet .tab input{
+	appearance: none;
+}
+
+.container-tablet .tab label{
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.container-tablet .tab label::after{
+	content: '+';
+	position: absolute;
+	right: 20px;
+	color: rgba(0, 0, 0, 0.1);
+	transition: transform 1s;
+
+}
+
+.container-tablet .tab:hover label::after{
+	color: #333;
+
+}
+.container-tablet .tab input:checked ~ label::after{
+	transform: rotate(135deg);
+	color: #fff;
+
+}
+.container-tablet .tab label h2{
+	width: 40px;
+	height: 40px;
+	background: #333;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	font-size: 1.25em;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+
+.container-tablet .tab input:checked ~ label h2{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: rgba(255, 255, 255, 0.2);
+	font-size: 8em;
+	justify-content: flex-end;
+	padding: 20px;
+}
+.container-tablet .tab:nth-child(2) label h2{
+	background: linear-gradient(135deg,#3b5b5d,#91d5da);
+}
+.container-tablet .tab:nth-child(3) label h2{
+	background: linear-gradient(135deg,#91d5da,#3b5b5d);
+}
+
+.container-tablet .tab:nth-child(4) label h2{
+	background: linear-gradient(135deg,#3b5b5d,#91d5da);
+}
+
+.container-tablet .tab:nth-child(5) label h2{
+	background: linear-gradient(135deg,#91d5da,#3b5b5d);
+}
+.container-tablet .tab:nth-child(6) label h2{
+	background: linear-gradient(135deg,#3b5b5d,#91d5da);
+}
+
+.container-tablet .tab:nth-child(7) label h2{
+	background: linear-gradient(135deg,#91d5da,#3b5b5d);
+}
+
+.container-tablet .tab label h3{
+	position: relative;
+	font-weight: 500;
+	color: #333;
+	z-index: 10;
+}
+
+.container-tablet .tab input:checked ~ label h3{
+	background: #fff;
+	padding: 2px 10px;
+	color: #333;
+	border-radius: 5px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.container-tablet .tab .content-tab{
+	max-height: 0;
+	transition: 1s;
+	overflow: hidden;
+}
+
+.container-tablet .tab input:checked ~ .content-tab{
+	max-height: 100vh;
+}
+.container-tablet .tab .content-tab p{
+	position: relative;
+	padding: 10px 0;
+	color: #333;
+	z-index: 10;
+}
+
+.container-tablet .tab input:checked ~ .content-tab p{
+	color: #fff;
+	font-size: 17px;
+}
