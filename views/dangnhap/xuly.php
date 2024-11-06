@@ -4,12 +4,12 @@ if(isset($_POST["login"])) {
     $password = $_POST["password"];
     
     if ($username === "nv" && $password === "1234") {
-        $_SESSION["dangnhap"] = 'nv';
+        $_SESSION["dn"] = 'nv';
         header("Location:index.php?page=trangchu");
         exit();
     
     }elseif($username === "kh" && $password === "1234") {
-        $_SESSION["dangnhap"] = 'kh';
+        $_SESSION["dn"] = 'kh';
         header("Location:index.php?page=trangchu");
         exit();
     } else {

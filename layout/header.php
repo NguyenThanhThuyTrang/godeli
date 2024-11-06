@@ -18,7 +18,9 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
     <link rel="stylesheet" href="layout/style.css">
     <link rel="stylesheet" href="js/assets/css/dx.css">
     <link rel="stylesheet" href="js/assets/css/footer/footer.css" />
-    <title>Management Interface</title>
+    
+    <title>Godeli</title>
+    <link rel="shortcut icon" href="images/Godeli.png" type="image/x-icon" />
 </head>
 <body>
     <header>
@@ -34,7 +36,7 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
             </div>
             <div class="nav">
                 <?php
-                    if (isset($_SESSION["dangnhap"]) && $_SESSION["dangnhap"]) {
+                    if (isset($_SESSION["dn"]) && $_SESSION["dn"]) {
                         echo '<a href="#" id="logoutButton" style="text-decoration: none; padding: 0;"> <i class="fas fa-sign-out-alt"></i> Đăng xuất</a>';
                     } else {
                         echo '<a href="index.php?page=dangky" style="text-decoration: none; margin-left: 20px;"> <i class="fas fa-user-plus"></i> Đăng ký</a>/';

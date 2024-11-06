@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GoDeli Order Checkout</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="shortcut icon" href="js/assets/logo/Godeli.png" type="image/x-icon" />
   <style>
     /* Reset CSS */
     * {
@@ -245,7 +246,13 @@
         <span>Tổng cộng:</span>
         <span>92.000 đ</span>
       </div>
+      <br>
+      <center><i class="fa fa-credit-card fa-4x" aria-hidden="true"></i>
+      <p style="color: red;">Vui lòng nhập đúng thông tin Khách hàng, kiểm tra Giỏ hàng trước khi Đặt hàng.</p></center>
+      
+      
     </div>
+    
 
     <div class="delivery-info">
       <h2>Thông tin nhận hàng</h2>
@@ -261,7 +268,7 @@
 
         <label for="branch">Chọn chi nhánh:</label>
         <select id="branch" name="branch" required>
-          <option value="tanbinh">Chi nhánh Tân Bình</option>
+          <option value="tanbinh">Chi nhánh Quận 1</option>
           <option value="govap">Chi nhánh Gò Vấp</option>
           <option value="binhthanh">Chi nhánh Bình Thạnh</option>
         </select>

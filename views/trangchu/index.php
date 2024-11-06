@@ -17,21 +17,21 @@
                 <h3>SẢN PHẨM MỚI NHẤT</h3>
                 <div class="product-grid">
                     <div class="product-card">
-                        <img src="images/food-menu-1.png?height=200&width=300" alt="Hà Lan">
-                        <h4>Hà Lan</h4>
+                        <img src="images/garan.jpg" alt="Đùi chiên">
+                        <h4>Gà giòn</h4>
                         <p class="price">45,000 VNĐ</p>
                         <a href="#" class="add-to-cart">Thêm giỏ hàng</a>
                     </div>
                     <div class="product-card">
-                        <img src="images/food-menu-2.png?height=200&width=300" alt="Mỳ Ý phong cách Trung Quốc">
-                        <h4>Mỳ Ý phong cách Trung Quốc</h4>
+                        <img src="images/garancombo.jpg" alt="combo đủ no">
+                        <h4>Combo ngon ngon</h4>
                         <p class="price">60,000 VNĐ</p>
                         <a href="#" class="add-to-cart">Thêm giỏ hàng</a>
                     </div>
                     <div class="product-card">
-                        <img src="images/food-menu-3.png?height=200&width=300" alt="Mỳ Ý phong cách Trung Quốc">
-                        <h4>Mỳ Ý phong cách Trung Quốc</h4>
-                        <p class="price">45,000 VNĐ</p>
+                        <img src="images/khoaitaychien.jpg" alt="Khoai tây chiên">
+                        <h4>Khoai tây chiên</h4>
+                        <p class="price">30,000 VNĐ</p>
                         <a href="#" class="add-to-cart">Thêm giỏ hàng</a>
                     </div>
                 </div>
