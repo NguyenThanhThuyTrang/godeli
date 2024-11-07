@@ -31,8 +31,11 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
                 <a href="index.php?page=giohang">Giỏ hàng <span class="button-icon"><i class="fa fa-cart-plus"></i> <sup>+</sup> <sup id="cart" name="cart">0</sup></span></a>
             </div>
             <div class="search-container">
-                <input type="search" placeholder="Tìm kiếm">
-                <button type="submit">Tìm kiếm</button>
+                <form action="index.php" method="get">
+                    <input type="hidden" name="page" value="sanpham">
+                    <input type="text" name="search" placeholder="Tìm kiếm món ăn">
+                    <button type="submit">Tìm kiếm</button>
+                </form>
             </div>
             <div class="nav">
                 <?php
@@ -50,7 +53,7 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
     <!-- Modal xác nhận -->
     <div id="logoutModal" class="modal" style="display: none;">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal()">×</span>
             <h4>Xác nhận đăng xuất</h4>
             <p>Bạn có chắc chắn muốn đăng xuất không?</p>
             <button onclick="confirmLogout()">Có</button>

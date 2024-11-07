@@ -1,88 +1,246 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
-.container {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-.sidebar {
-    width: 200px;
-    padding-right: 20px;
-}
-.sidebar h2 {
-    margin-top: 0;
-}
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-.sidebar li {
-    padding: 10px;
-    margin-bottom: 5px;
-    background-color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.category-button {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #333;
-    background-color:white;
-    border-radius: 10px;
-    text-align: left;
-    transition: all 0.3s ease;
+/* Tổng thể */  
+body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    background-color: #f0f0f0;  
+}  
+
+/* Container */  
+.container {  
+    display: flex;  
+    max-width: 1200px;  
+    margin: 0 auto;  
+    padding: 20px;  
+}  
+
+/* Sidebar */  
+.sidebar {  
+    width: 200px;  
+    padding-right: 20px;  
+}  
+
+.sidebar h2 {  
+    margin-top: 0;  
+    font-weight: bold;  
+    color: #ff5e24;  
+}  
+
+.sidebar ul {  
+    list-style-type: none;  
+    padding: 0;  
+}  
+
+.sidebar li {  
+    margin-bottom: 5px;  
+    background-color: #fff;  
+    border-radius: 10px;  
+    cursor: pointer;  
+    transition: background-color 0.3s, color 0.3s;  
+}  
+
+.category-button {  
+    display: block;  
+    width: 100%;  
+    margin-bottom: 10px;  
+    font-size: 16px;  
+    color: #333;  
+    background-color: white;  
+    border-radius: 10px;  
+    text-align: left;  
+    transition: all 0.3s ease;  
+    border: none;  
+    padding: 8px 0px;  
+}  
+
+#category-list li a {  
+    border-radius: 10px;  
+    font-weight: bold;  
+    text-decoration: none;  
+    padding-left: 10px;  
+    color: #ff7f50;  
+}  
+
+.category-button:hover {  
+    background-color: #ff7f50;  
+}  
+
+#category-list li a:hover {  
+    color: white;  
+}  
+
+/* Content */  
+.content {  
+    flex: 1;  
+    display: flex;  
+    flex-wrap: wrap;  
+    gap: 20px;  
+}  
+
+/* Recipe Card */  
+.recipe-card {  
+    width: calc(33.333% - 20px);  
+    background-color: white;  
+    border-radius: 10px;  
+    overflow: hidden;  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+    transition: transform 0.3s, box-shadow 0.3s;  
+    height: 350px;  
+}  
+
+.recipe-card:hover {  
+    transform: scale(1.03);  
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  
+}  
+
+.recipe-image {  
+    width: 100%;  
+    height: 150px;  
+    object-fit: cover;  
+    transition: transform 0.3s;  
+}  
+
+.recipe-card:hover .recipe-image {  
+    transform: scale(1.1);  
+}  
+
+.recipe-info {  
+    padding: 15px;  
+}  
+
+.recipe-info h3 {  
+    margin-top: 0;  
+    color: #333;  
+}  
+
+.recipe-meta {  
+    display: flex;  
+    justify-content: space-between;  
+    color: #777;  
+    font-size: 0.9em;  
+}  
+
+.recipe-card button {  
+    background-color: #ff7f50;  
+    border: none;  
+    border-radius: 5px;  
+    color: white;  
+    padding: 10px;  
+    cursor: pointer;  
+    transition: background-color 0.3s;  
+}  
+
+.recipe-card button:hover {  
+    background-color: #e06b3c;  
+}  
+
+/* Overlay styling */  
+.product-overlay {  
+    position: fixed;  
+    top: 0;  
+    left: 0;  
+    width: 100%;  
+    height: 100%;  
+    background-color: rgba(0, 0, 0, 0.5);  
+    display: none;  
+    z-index: 10;  
+}  
+  
+.product-detail-form {  
+    position: fixed;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%);  
+    background-color: white;  
+    border-radius: 10px;  
+    padding: 30px; 
+    width: 500px; 
+    max-width: 90%;  
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);  
+    z-index: 20;  
+    display: none;  
+    flex-direction: column;  
+    justify-content: center;  
+    align-items: center;  
+} 
+
+
+.detail-content {  
+    display: flex;  
+    align-items: flex-start;  
+    gap: 20px;  
+}  
+
+.detail-image {  
+    width: 200px;  
+    height: auto;  
+    border-radius: 10px;  
+}  
+
+.detail-info {  
+    display: flex;  
+    flex-direction: column;  
+}  
+
+.product-name {  
+    font-size: 1.5em;  
+    color: #ff5e24;  
+}  
+
+.product-description {  
+    color: #555;  
+    margin: 10px 0;  
+}  
+
+.product-price {  
+    font-size: 1.2em;  
+    color: #ff5e24;  
+    font-weight: bold;  
+    margin: 10px 0;  
+}  
+
+.quantity-control {  
+    display: flex;  
+    align-items: center;  
+    margin: 10px 0;  
+}  
+
+.quantity-btn {  
+    background-color: #ff7f50;  
+    border: none;  
+    color: white;  
+    padding: 5px 10px;  
+    cursor: pointer;  
+    border-radius: 5px;  
+}  
+
+.quantity-input {  
+    width: 50px;  
+    text-align: center;  
+    margin: 0 10px;  
+}  
+
+.add-to-cart-button {  
+    background-color: #ff7f50;  
+    border: none;  
+    padding: 10px;  
+    border-radius: 5px;  
+    color: white;  
+    cursor: pointer;  
+    width: auto; /* Thay đổi từ 100% -> tự động cho nút nhỏ lại */  
+    margin-top: 15px;  
+    position: absolute; /* Định vị tuyệt đối */  
+    right: 20px; /* Khoảng cách từ bên phải */  
+    bottom: 20px; /* Khoảng cách từ đáy */  
 }
 
-.sidebar li:hover{
-    background-color: #ff7f50;
-    color: white;
-}
-.content {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-.recipe-card {
-    width: calc(33.333% - 20px);
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.recipe-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-.recipe-info {
-    padding: 15px;
-}
-.recipe-info h3 {
-    margin-top: 0;
-}
-.recipe-meta {
-    display: flex;
-    justify-content: space-between;
-    color: #777;
-    font-size: 0.9em;
-}
-.sidebar #category-list button{
-    background-color: none;
-    border:none;
-}
-.recipe-card button{
-    background-color: #ff7f50;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 5px;
+/* Close Button */  
+.product-detail-form .close-button {  
+    position: absolute;  
+    top: 10px;  
+    right: 10px;  
+    font-size: 1.5em;  
+    color: #ff5e24;  
+    cursor: pointer;  
+    font-weight: bold;  
 }
