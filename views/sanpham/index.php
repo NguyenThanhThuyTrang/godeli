@@ -1,5 +1,5 @@
 <?php
-    echo '<link rel="stylesheet" href="css/sanpham/style.css?v=1">';
+    echo '<link rel="stylesheet" href="css/sanpham/style.css?v=3">';
     echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">';
     include 'controller/csanpham.php';
 
@@ -53,12 +53,8 @@
                                     <h3>' . $sp['tenma'] . '</h3>
                                     <div class="recipe-meta">
                                         <b><span>' . number_format($sp['giaban'], 0, ',', '.') . ' VND</span></b>
-                                        <span>💬 0</span>
                                     </div>
                                     <br>
-                                    <button class="cart-button">
-                                        <i class="fa fa-plus"></i> Thêm vào giỏ hàng
-                                    </button>
                                 </div>
                             </a>
                         </div>';
