@@ -4,11 +4,16 @@
     include 'controller/csanpham.php';
 
     $controllers = new CSanPham(); 
-    $sanPhamChiTiet = null;
+    $tatCaSanPham = [];
 
-    if (isset($_GET['mama'])) {
-        $mama = $_GET['mama'];
-        $sanPhamChiTiet = $controllers->layChiTietSanPham($mama);
+    if (isset($_GET['category']) && $_GET['category'] !== 'all') {
+        $category = $_GET['category'];
+        $tatCaSanPham = $controllers->laySanPhamTheoLoai($category);
+    } elseif (isset($_GET['search']) && !empty($_GET['search'])) {
+        $ten = $_GET['search'];
+        $tatCaSanPham = $controllers->timKiemSanPham($ten);
+    } else {
+        $tatCaSanPham = $controllers->layTatCaSanPham();
     }
 ?>
 <body>
@@ -37,56 +42,26 @@
                     </li>
                 </ul>
             </div>
-            <div class="content">
+            <div class="content" id="product-list">
                 <?php
-                    if (isset($_GET['search']) && !empty($_GET['search'])) {
-                        $ten = $_GET['search'];
-                        $sanPhamList = $controllers->timKiemSanPham($ten);
-                        if (!empty($sanPhamList)) {
-                            foreach ($sanPhamList as $sp) {
-                                echo '
-                                <div class="recipe-card">
-                                    <a href="index.php?page=sanpham&mama=' . $sp['mama'] . '">
-                                        <img src="images/' . $sp['hinhanh'] . '" alt="' . $sp['mama'] . '" class="recipe-image">
-                                        <div class="recipe-info">
-                                            <h3>' . $sp['tenma'] . '</h3>
-                                            <div class="recipe-meta">
-                                                <b><span>' . number_format($sp['giaban'], 0, ',', '.') . ' VND</span></b>
-                                                <span>💬 0</span> <!-- Bạn có thể thay số bình luận thực tế nếu có -->
-                                            </div>
-                                            <br>
-                                            <button class="cart-button">
-                                                <i class="fa fa-plus"></i> Thêm vào giỏ hàng
-                                            </button>
-                                        </div>
-                                    </a>
-                                </div>';
-                            }
-                        } else {
-                            echo '<p>Không tìm thấy món ăn với tên này.</p>';
-                        }
-                    } else {
-                        $category = isset($_GET['category']) ? $_GET['category'] : 'all';
-                        $tatCaSanPham = $controllers->laySanPhamTheoLoai($category);
-                        foreach ($tatCaSanPham as $sp) {      
-                            echo '
-                            <div class="recipe-card">
-                                <a href="index.php?page=sanpham&mama=' . $sp['mama'] . '">
-                                    <img src="images/' . $sp['hinhanh'] . '" alt="' . $sp['mama'] . '" class="recipe-image">
-                                    <div class="recipe-info">
-                                        <h3>' . $sp['tenma'] . '</h3>
-                                        <div class="recipe-meta">
-                                            <b><span>' . number_format($sp['giaban'], 0, ',', '.') . ' VND</span></b>
-                                            <span>💬 0</span> <!-- Bạn có thể thay số bình luận thực tế nếu có -->
-                                        </div>
-                                        <br>
-                                        <button class="cart-button">
-                                            <i class="fa fa-plus"></i> Thêm vào giỏ hàng
-                                        </button>
+                    foreach ($tatCaSanPham as $sp) {
+                        echo '
+                        <div class="recipe-card">
+                            <a href="#" class="product-link" data-mama="' . $sp['mama'] . '" data-tenma="' . $sp['tenma'] . '" data-hinhanh="' . $sp['hinhanh'] . '" data-giaban="' . $sp['giaban'] . '" data-congthuc="' . $sp['congthuc'] . '">
+                                <img src="images/' . $sp['hinhanh'] . '" alt="' . $sp['tenma'] . '" class="recipe-image">
+                                <div class="recipe-info">
+                                    <h3>' . $sp['tenma'] . '</h3>
+                                    <div class="recipe-meta">
+                                        <b><span>' . number_format($sp['giaban'], 0, ',', '.') . ' VND</span></b>
+                                        <span>💬 0</span>
                                     </div>
-                                </a>
-                            </div>';
-                         }
+                                    <br>
+                                    <button class="cart-button">
+                                        <i class="fa fa-plus"></i> Thêm vào giỏ hàng
+                                    </button>
+                                </div>
+                            </a>
+                        </div>';
                     }
                 ?>
             </div>
@@ -96,26 +71,45 @@
     <!-- Overlay -->
     <div class="product-overlay" id="productOverlay" onclick="closeProductDetails()"></div>
     <!-- Product Detail Form -->
-    <div class="product-detail-form" id="productDetailForm" style="<?php echo $sanPhamChiTiet ? 'display: block;' : 'display: none;'; ?>">  
-    <span class="close-button" onclick="closeProductDetails()">×</span>  
-    <div class="detail-content">  
-        <img src="images/<?php echo $sanPhamChiTiet['hinhanh']; ?>" alt="Product Image" class="detail-image">  
-        <div class="detail-info">  
-            <h2 class="product-name"><?php echo $sanPhamChiTiet['tenma']; ?></h2>  
-            <p class="product-description"><?php echo $sanPhamChiTiet['congthuc']; ?></p>  
-            <p class="product-price"><?php echo number_format($sanPhamChiTiet['giaban'], 0, ',', '.') . ' VND'; ?></p>  
-            <div class="quantity-control">  
-                <button class="quantity-btn">-</button>  
-                <input type="number" value="1" min="1" class="quantity-input">  
-                <button class="quantity-btn">+</button>  
+    <div class="product-detail-form" id="productDetailForm" style="display: none;">  
+        <span class="close-button" onclick="closeProductDetails()">×</span>  
+        <div class="detail-content">  
+            <img id="detailImage" src="" alt="Product Image" class="detail-image">  
+            <div class="detail-info">  
+                <h2 id="detailName" class="product-name"></h2>  
+                <p id="detailDescription" class="product-description"></p>  
+                <p id="detailPrice" class="product-price"></p>  
+                <div class="quantity-control">  
+                    <button class="quantity-btn">-</button>  
+                    <input type="number" value="1" min="1" class="quantity-input">  
+                    <button class="quantity-btn">+</button>  
+                </div>  
+                <button class="add-to-cart-button">Thêm vào giỏ hàng</button>  
             </div>  
-            <button class="add-to-cart-button">Thêm vào giỏ hàng</button>  
         </div>  
-    </div>  
-</div>
+    </div>
 
 </body>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.product-link').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const mama = this.getAttribute('data-mama');
+            const tenma = this.getAttribute('data-tenma');
+            const hinhanh = this.getAttribute('data-hinhanh');
+            const giaban = this.getAttribute('data-giaban');
+            const congthuc = this.getAttribute('data-congthuc');
+
+            document.getElementById('detailImage').src = `images/${hinhanh}`;
+            document.getElementById('detailName').textContent = tenma;
+            document.getElementById('detailDescription').textContent = congthuc;
+            document.getElementById('detailPrice').textContent = `${parseInt(giaban).toLocaleString()} VND`;
+            openProductDetails();
+        });
+    });
+});
+
 function openProductDetails() {
     document.getElementById('productOverlay').style.display = 'block';
     document.getElementById('productDetailForm').style.display = 'block';
