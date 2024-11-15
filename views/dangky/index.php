@@ -1,6 +1,7 @@
 <?php
     echo'<link rel="shortcut icon" href="js/assets\ico\cookerTon.png" />
         <link rel="stylesheet" href="js/assets/css/login.css" />';
+    include "handle.php";
 ?>
   </head> 
   <body>
@@ -12,26 +13,27 @@
         <!-- Sign-up -->
         <div class="login__inner">
           <h1>Đăng ký</h1>
-          <form>
+          <form method="post">
             <div class="form-control">
-              <input type="text" id="username" placeholder="Username" />
+              <input type="text" id="username" name="username" placeholder="Username" />
               <span></span>
               <small></small>
             </div>
             <div class="form-control">
-              <input type="email" id="email" placeholder="Email" />
+              <input type="email" id="email" name="email" placeholder="Email" />
               <span></span>
               <small></small>
             </div>
             <div class="form-control">
-              <input type="password" id="password" placeholder="Password" />
+              <input type="password" id="password" name="password" placeholder="Password" />
               <span></span>
               <small></small>
             </div>
             <div class="form-control">
               <input
                 type="password"
-                id="Confirm Password"
+                id="confirm_password"
+                name="confirm_password"
                 placeholder="Confirm Password"
               />
               <span></span>
@@ -41,6 +43,7 @@
               type="submit"
               value="Đăng ký"
               id="signUp"
+              name="signUp"
               data-target="#signUpModal"
               data-toggle="modal"
               style="background-color: orange";

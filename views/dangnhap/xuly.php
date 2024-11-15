@@ -1,19 +1,19 @@
 <?php
+session_start();
+include "controller/cUser.php";
+$cUser = new cUser();
+
 if(isset($_POST["login"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    
-    if ($username === "nv" && $password === "1234") {
-        $_SESSION["dn"] = 'nv';
-        header("Location:index.php?page=trangchu");
-        exit();
-    
-    }elseif($username === "kh" && $password === "1234") {
-        $_SESSION["dn"] = 'kh';
-        header("Location:index.php?page=trangchu");
-        exit();
+    $check = $cUser->login($username, $password);
+    if($check) {
+        // create a new variable for the checking login yet
+        $_SESSION["login"] = true;
+        header("Refresh: 0; url=index.php?page=trangchu");
     } else {
         echo '<script>alert("Đăng nhập không thành công");</script>';
     }
 }
 ?>
+
