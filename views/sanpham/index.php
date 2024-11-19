@@ -1,20 +1,37 @@
 <?php
-    echo '<link rel="stylesheet" href="css/sanpham/style.css?v=3">';
-    echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">';
-    include 'controller/csanpham.php';
+session_start();
+echo '<link rel="stylesheet" href="css/sanpham/style.css?v=3">';
+echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">';
+include 'controller/csanpham.php'; 
 
-    $controllers = new CSanPham(); 
-    $tatCaSanPham = [];
+$controllers = new CSanPham(); 
+$tatCaSanPham = [];
 
-    if (isset($_GET['category']) && $_GET['category'] !== 'all') {
-        $category = $_GET['category'];
-        $tatCaSanPham = $controllers->laySanPhamTheoLoai($category);
-    } elseif (isset($_GET['search']) && !empty($_GET['search'])) {
-        $ten = $_GET['search'];
-        $tatCaSanPham = $controllers->timKiemSanPham($ten);
-    } else {
-        $tatCaSanPham = $controllers->layTatCaSanPham();
+if (isset($_GET['category']) && $_GET['category'] !== 'all') {
+    $category = $_GET['category'];
+    $tatCaSanPham = $controllers->laySanPhamTheoLoai($category);
+} elseif (isset($_GET['search']) && !empty($_GET['search'])) {
+    $ten = $_GET['search'];
+    $tatCaSanPham = $controllers->timKiemSanPham($ten);
+} else {
+    $tatCaSanPham = $controllers->layTatCaSanPham();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $mama = $_POST['mama'];
+    $soluong = $_POST['soluong'];
+    $dongia = $_POST['dongia'];
+    $makh = $_SESSION['makh'] ?? null;
+
+    if ($makh && $mama && $soluong > 0 && $dongia > 0) {
+        $result = $controllers->themVaoGioHang($mama, $soluong, $dongia, $makh);
+        if ($result === true) {
+            echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng thành công!");</script>';
+        } else {
+            echo '<script>alert("' . $result . '");</script>';
+        }
     }
+}
 ?>
 <body>
     <form action="" method="get">
@@ -47,7 +64,7 @@
                     foreach ($tatCaSanPham as $sp) {
                         echo '
                         <div class="recipe-card">
-                            <a href="#" class="product-link" data-mama="' . $sp['mama'] . '" data-tenma="' . $sp['tenma'] . '" data-hinhanh="' . $sp['hinhanh'] . '" data-giaban="' . $sp['giaban'] . '" data-congthuc="' . $sp['congthuc'] . '">
+                            <a href="#" class="product-link" data-mama="' . $sp['mama'] . '" data-tenma="' . $sp['tenma'] . '" data-hinhanh="' . $sp['hinhanh'] . '" data-giaban="' . $sp['giaban'] . '">
                                 <img src="images/' . $sp['hinhanh'] . '" alt="' . $sp['tenma'] . '" class="recipe-image">
                                 <div class="recipe-info">
                                     <h3>' . $sp['tenma'] . '</h3>
@@ -67,7 +84,7 @@
     <!-- Overlay -->
     <div class="product-overlay" id="productOverlay" onclick="closeProductDetails()"></div>
     <!-- Product Detail Form -->
-    <div class="product-detail-form" id="productDetailForm" style="display: none;">  
+    <form class="product-detail-form" id="productDetailForm" style="display: none;" method="post">
         <span class="close-button" onclick="closeProductDetails()">×</span>  
         <div class="detail-content">  
             <img id="detailImage" src="" alt="Product Image" class="detail-image">  
@@ -76,14 +93,17 @@
                 <p id="detailDescription" class="product-description"></p>  
                 <p id="detailPrice" class="product-price"></p>  
                 <div class="quantity-control">  
-                    <button class="quantity-btn">-</button>  
-                    <input type="number" value="1" min="1" class="quantity-input">  
-                    <button class="quantity-btn">+</button>  
+                    <button type="button" class="quantity-btn" id="decrease-btn">-</button>  
+                    <input type="number" name="soluong" value="1" min="1" class="quantity-input" id="quantity-input">  
+                    <button type="button" class="quantity-btn" id="increase-btn">+</button>  
                 </div>  
-                <button class="add-to-cart-button">Thêm vào giỏ hàng</button>  
+                <input type="hidden" name="makh" id="makh">
+                <input type="hidden" name="mama" id="mama">
+                <input type="hidden" name="dongia" id="dongia">
+                <button type="submit" name="add_to_cart" class="add-to-cart-button">Thêm vào giỏ hàng</button>  
             </div>  
         </div>  
-    </div>
+    </form>
 
 </body>
 <script>
@@ -95,15 +115,30 @@ document.addEventListener('DOMContentLoaded', function() {
             const tenma = this.getAttribute('data-tenma');
             const hinhanh = this.getAttribute('data-hinhanh');
             const giaban = this.getAttribute('data-giaban');
-            const congthuc = this.getAttribute('data-congthuc');
+            const makh = '<?php echo isset($_SESSION['makh']) ? $_SESSION['makh'] : ''; ?>';
 
             document.getElementById('detailImage').src = `images/${hinhanh}`;
             document.getElementById('detailName').textContent = tenma;
-            document.getElementById('detailDescription').textContent = congthuc;
             document.getElementById('detailPrice').textContent = `${parseInt(giaban).toLocaleString()} VND`;
+            document.getElementById('mama').value = mama;
+            document.getElementById('dongia').value = giaban;
+            document.getElementById('makh').value = makh;
             openProductDetails();
         });
     });
+
+    document.getElementById('increase-btn').addEventListener('click', function() {
+        const quantityInput = document.getElementById('quantity-input');
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    });
+
+    document.getElementById('decrease-btn').addEventListener('click', function() {
+        const quantityInput = document.getElementById('quantity-input');
+        if (quantityInput.value > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+    });
+
 });
 
 function openProductDetails() {

@@ -22,7 +22,7 @@ class mUser {
 
     // READ: Lấy thông tin người dùng theo tên đăng nhập
     public function getUser($tennd) {
-        $query = "SELECT tennd, sodienthoai, email, diachi, mavaitro, ngaysinh, gioitinh FROM khachhang WHERE tennd = ?";
+        $query = "SELECT makh, tennd, sodienthoai, email, diachi, mavaitro, ngaysinh, gioitinh FROM khachhang WHERE tennd = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("s", $tennd);
 
@@ -60,22 +60,22 @@ class mUser {
     }
 
     // Kiểm tra mật khẩu
-    public function verifyPassword($tennd, $matkhau): bool {
-        $query = "SELECT matkhau FROM khachhang WHERE tennd = ?";
+    public function verifyPassword($tennd, $matkhau) {
+        $query = "SELECT * FROM khachhang WHERE tennd = ? AND matkhau = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("s", $tennd);
-
+        $stmt->bind_param("ss", $tennd, $matkhau);
+    
         if ($stmt->execute()) {
             $result = $stmt->get_result();
             $user = $result->fetch_assoc();
             $stmt->close();
-            if ($user && $matkhau === $user['matkhau']) {
-                return true;
-            }
+            return $user; // Trả về thông tin người dùng nếu đăng nhập thành công
         }
-
-        return false;
+    
+        $stmt->close();
+        return null; // Trả về null nếu không tìm thấy
     }
+    
 }
 
 

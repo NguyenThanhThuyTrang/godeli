@@ -1,5 +1,5 @@
 <?php
-include 'models/msanpham.php';
+include_once 'models/msanpham.php';
 
 class CSanPham {
     private $sanPhamModel;
@@ -22,6 +22,10 @@ class CSanPham {
 
     public function layChiTietSanPham($mama) {
         return $this->sanPhamModel->layChiTietSanPham($mama);
+    }
+
+    public function themVaoGioHang($mama, $soluong, $dongia, $makh) {
+        return $this->sanPhamModel->themVaoGioHang($mama, $soluong, $dongia, $makh);
     }
 }
 ?>

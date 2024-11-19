@@ -12,8 +12,8 @@ class SanPham {
     public function layTatCaSanPham() {
         $sql = "SELECT monan.*, loaimonan.tenloai 
                 FROM monan 
-                JOIN loaimonan ON monan.maloaima = loaimonan.maloaima";
-
+                JOIN loaimonan ON monan.maloaima = loaimonan.maloaima
+                WHERE monan.soluong > 0";
         $result = $this->conn->query($sql);
         $sanPhamList = [];
 
@@ -29,10 +29,11 @@ class SanPham {
     public function laySanPhamTheoLoai($loai) {
         $sql = "SELECT monan.*, loaimonan.tenloai 
                 FROM monan 
-                JOIN loaimonan ON monan.maloaima = loaimonan.maloaima";
+                JOIN loaimonan ON monan.maloaima = loaimonan.maloaima
+                WHERE monan.soluong > 0";
         
         if ($loai !== 'all') {
-            $sql .= " WHERE loaimonan.tenloai = ?";
+            $sql .= " AND loaimonan.tenloai = ?";
         }
 
         $stmt = $this->conn->prepare($sql);
@@ -56,7 +57,7 @@ class SanPham {
         $sql = "SELECT monan.*, loaimonan.tenloai 
                 FROM monan 
                 JOIN loaimonan ON monan.maloaima = loaimonan.maloaima 
-                WHERE monan.tenma LIKE ?";
+                WHERE monan.tenma LIKE ? AND monan.soluong > 0";
         
         $stmt = $this->conn->prepare($sql);
         $searchTerm = "%" . $ten . "%";
@@ -78,7 +79,7 @@ class SanPham {
         $sql = "SELECT monan.*, loaimonan.tenloai 
                 FROM monan 
                 JOIN loaimonan ON monan.maloaima = loaimonan.maloaima 
-                WHERE monan.mama = ?";
+                WHERE monan.mama = ? AND monan.soluong > 0";
         
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $mama);
@@ -86,5 +87,41 @@ class SanPham {
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    public function themVaoGioHang($mama, $soluong, $dongia, $makh) {
+        $this->conn->begin_transaction(); // Bắt đầu giao dịch
+        try {
+            // Kiểm tra số lượng sản phẩm trong kho
+            $sqlCheck = "SELECT soluong FROM monan WHERE mama = ?";
+            $stmtCheck = $this->conn->prepare($sqlCheck);
+            $stmtCheck->bind_param("i", $mama);
+            $stmtCheck->execute();
+            $resultCheck = $stmtCheck->get_result();
+            $row = $resultCheck->fetch_assoc();
+    
+            if ($row['soluong'] < $soluong) {
+                throw new Exception('Số lượng sản phẩm không đủ');
+            }
+    
+            // Thêm sản phẩm vào giỏ hàng
+            $sql = "INSERT INTO giohang (mama, soluong, dongia, makh) VALUES (?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("iiii", $mama, $soluong, $dongia, $makh);
+            $stmt->execute();
+    
+            // Cập nhật số lượng sản phẩm trong bảng monan
+            $sqlUpdate = "UPDATE monan SET soluong = soluong - ? WHERE mama = ?";
+            $stmtUpdate = $this->conn->prepare($sqlUpdate);
+            $stmtUpdate->bind_param("ii", $soluong, $mama);
+            $stmtUpdate->execute();
+    
+            $this->conn->commit(); // Xác nhận giao dịch
+            return true;
+        } catch (Exception $e) {
+            $this->conn->rollback(); // Hoàn tác giao dịch nếu có lỗi
+            return $e->getMessage(); // Trả về thông báo lỗi
+        }
+    }
+    
 }
 ?>

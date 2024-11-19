@@ -11,11 +11,12 @@ class cUser {
         if($status === false) return 2;
         return 0;
     }
-    function login($username, $password) : bool {
+    function login($username, $password) {
         $mUser = new mUser();
-        $hashPassword = md5($password);
-        $status = $mUser->verifyPassword($username, $hashPassword);
-        return $status;
+        $hashPassword = md5($password); // Mã hóa mật khẩu
+        $user = $mUser->verifyPassword($username, $hashPassword);
+    
+        return $user; // Trả về thông tin người dùng hoặc null
     }
 }
 
