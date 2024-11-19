@@ -1,6 +1,6 @@
 <?php
     class User {
-        public $makh;
+
         public $tennd;
         public $sodienthoai;
         public $email;
@@ -21,8 +21,7 @@
         //     $this->ngaysinh = $ngaysinh;
         //     $this->gioitinh = $gioitinh;
         // }
-        public function __construct($tennd, $email, $matkhau, $makh) {
-            $this->makh = $makh;
+        public function __construct($tennd, $email, $matkhau) {
             $this->tennd = $tennd;
             $this->email = $email;
             $this->setMatkhau($matkhau); // Using setter for password
