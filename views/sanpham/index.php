@@ -23,7 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $dongia = $_POST['dongia'];
     $makh = $_SESSION['makh'] ?? null;
 
-    if ($makh && $mama && $soluong > 0 && $dongia > 0) {
+    if (!$makh) {
+        echo '<script>
+                alert("Bạn phải đăng nhập để tiếp tục đặt món!");
+                window.location.href = "index.php?page=dangnhap";
+              </script>';
+        exit;
+    } elseif ($mama && $soluong > 0 && $dongia > 0) {
         $result = $controllers->themVaoGioHang($mama, $soluong, $dongia, $makh);
         if ($result === true) {
             echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng thành công!");</script>';
@@ -81,9 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         </div>
     </form>
 
-    <!-- Overlay -->
     <div class="product-overlay" id="productOverlay" onclick="closeProductDetails()"></div>
-    <!-- Product Detail Form -->
     <form class="product-detail-form" id="productDetailForm" style="display: none;" method="post">
         <span class="close-button" onclick="closeProductDetails()">×</span>  
         <div class="detail-content">  
@@ -106,49 +110,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     </form>
 
 </body>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.product-link').forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const mama = this.getAttribute('data-mama');
-            const tenma = this.getAttribute('data-tenma');
-            const hinhanh = this.getAttribute('data-hinhanh');
-            const giaban = this.getAttribute('data-giaban');
-            const makh = '<?php echo isset($_SESSION['makh']) ? $_SESSION['makh'] : ''; ?>';
-
-            document.getElementById('detailImage').src = `images/${hinhanh}`;
-            document.getElementById('detailName').textContent = tenma;
-            document.getElementById('detailPrice').textContent = `${parseInt(giaban).toLocaleString()} VND`;
-            document.getElementById('mama').value = mama;
-            document.getElementById('dongia').value = giaban;
-            document.getElementById('makh').value = makh;
-            openProductDetails();
-        });
-    });
-
-    document.getElementById('increase-btn').addEventListener('click', function() {
-        const quantityInput = document.getElementById('quantity-input');
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-    });
-
-    document.getElementById('decrease-btn').addEventListener('click', function() {
-        const quantityInput = document.getElementById('quantity-input');
-        if (quantityInput.value > 1) {
-            quantityInput.value = parseInt(quantityInput.value) - 1;
-        }
-    });
-
-});
-
-function openProductDetails() {
-    document.getElementById('productOverlay').style.display = 'block';
-    document.getElementById('productDetailForm').style.display = 'block';
-}
-
-function closeProductDetails() {
-    document.getElementById('productOverlay').style.display = 'none';
-    document.getElementById('productDetailForm').style.display = 'none';
-}
-</script>
+<script src="js/sanpham/sanpham.js"></script>
 </html>
