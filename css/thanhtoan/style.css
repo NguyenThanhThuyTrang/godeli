@@ -1,3 +1,6 @@
+body{
+    padding-top: 100px;
+}
 .right{
     display: flex;
     float: right;

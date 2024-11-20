@@ -1,3 +1,6 @@
+body{
+    padding-top: 80px;
+}
 .login-container{
   overflow-x: hidden;
     width: 100%;

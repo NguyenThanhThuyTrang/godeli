@@ -19,12 +19,12 @@
       font-family: Arial, sans-serif;
       background-color: #f8f8f8;
       color: #333;
+      padding-top: 100px;
     }
 
     .container {
       max-width: 1000px;
-      margin: 20px auto;
-      padding: 20px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;

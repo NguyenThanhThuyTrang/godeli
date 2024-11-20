@@ -122,6 +122,33 @@ class SanPham {
             return $e->getMessage(); // Trả về thông báo lỗi
         }
     }
-    
+
+    public function laySanPhamMoiNhat($limit = 4) {
+        $sql = "SELECT * FROM monan WHERE soluong > 50 ORDER BY mama DESC LIMIT ?";
+        if ($stmt = $this->conn->prepare($sql)) {
+            $stmt->bind_param("i", $limit);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $sanPham = $result->fetch_all(MYSQLI_ASSOC);
+            return $sanPham;
+        } else {
+            echo "Lỗi truy vấn: " . $this->conn->error;
+            return [];
+        }
+    }
+
+    public function laySanPhamCombo($limit = 4) {
+        $sql = "SELECT * FROM monan WHERE maloaima = 5 ORDER BY mama DESC LIMIT ?";
+        if ($stmt = $this->conn->prepare($sql)) {
+            $stmt->bind_param("i", $limit);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $sanPham = $result->fetch_all(MYSQLI_ASSOC);
+            return $sanPham;
+        } else {
+            echo "Lỗi truy vấn: " . $this->conn->error;
+            return [];
+        }
+    }
 }
 ?>

@@ -24,23 +24,46 @@ $items = $c->HienThiSP($makh);
     <link rel="stylesheet" href="layout/style_1.css">  
 
     <style>  
-        .cart-container {  
-            max-width: 98%;  
-            margin: auto;  
-            background: white;  
-            border-radius: 8px;  
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
-            padding: 25px;  
-        }  
+    body{
+        padding-top: 90px;
+    }
+    .cart-container {  
+        max-width: 98%;  
+        margin: auto;  
+        background: white;  
+        border-radius: 8px;  
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+        padding: 25px;  
+    }  
 
-        .cart-table th, .cart-table td {  
-            vertical-align: middle;  
-        }  
+    .cart-table th,  
+    .cart-table td {  
+        vertical-align: middle !important;  
+    }  
 
-        .cart-actions button {  
-            margin-right: 5px;  
-        }  
-    </style>  
+    .align-middle {  
+        vertical-align: middle !important;  
+    }
+
+    .cart-actions button {  
+        margin-right: 5px;  
+    }  
+    
+
+    .recipe-image {  
+        float: left; /* Canh trái */
+        max-width: 75px; /* Đặt chiều rộng tối đa */  
+        max-height: 75px; /* Đặt chiều cao tối đa */  
+        object-fit: cover;  /* Cắt hình ảnh để phù hợp */  
+        border-radius: 8px; /* Bo góc cho hình ảnh */  
+        margin: auto; /* Căn giữa */  
+        display: block; /* Chuyển hình ảnh thành khối để sử dụng margin auto */  
+    }  
+
+    td[data-th="Hình ảnh"] {  
+        text-align: center; /* Căn giữa nội dung */  
+    }  
+</style>  
 </head>  
 <body>  
     <div class="cart-container">  
@@ -48,7 +71,8 @@ $items = $c->HienThiSP($makh);
         <table id="cart-table" class="table table-hover table-condensed">  
             <thead>  
                 <tr>  
-                    <th style="width:50%">Sản phẩm</th>  
+                    <th style="width:15%">Hình ảnh</th>
+                    <th style="width:25%">Sản phẩm</th>  
                     <th style="width:10%">Giá</th>  
                     <th style="width:8%">Số lượng</th>  
                     <th style="width:22%" class="text-center">Tổng</th>  
@@ -65,15 +89,18 @@ $items = $c->HienThiSP($makh);
                         $total = $item['soluong'] * $item['giaban'];  
                     ?>  
                     <tr>  
-                        <td data-th="Sản phẩm">  
+                        <td data-th="Hình ảnh" class="align-middle">  
+                            <img src="images/<?php echo htmlspecialchars($item['hinhanh']); ?>" alt="<?php echo htmlspecialchars($item['tenma']); ?>" class="recipe-image">  
+                        </td>
+                        <td data-th="Sản phẩm" class="align-middle">  
                             <h5 class="nomargin"><?php echo htmlspecialchars($item['tenma']); ?></h5>  
                         </td>  
-                        <td data-th="Giá"><?php echo number_format($item['giaban'], 0, ',', '.'); ?>₫</td>  
-                        <td data-th="Số lượng">  
+                        <td data-th="Giá" class="align-middle"><?php echo number_format($item['giaban'], 0, ',', '.'); ?>₫</td>  
+                        <td data-th="Số lượng" class="align-middle" >  
                             <input type="number" class="form-control text-center" value="<?php echo (int)$item['soluong']; ?>" min="1">  
                         </td>  
-                        <td data-th="Tổng" class="text-center"><?php echo number_format($total, 0, ',', '.'); ?>₫</td>  
-                        <td class="cart-actions" data-th="">  
+                        <td data-th="Tổng" class="text-center align-middle"><?php echo number_format($total, 0, ',', '.'); ?>₫</td>  
+                        <td class="cart-actions align-middle" data-th="">  
                             <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>  
                             <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>  
                         </td>  

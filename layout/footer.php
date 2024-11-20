@@ -6,7 +6,7 @@
     .footer-container {
         display: flex;
         flex-wrap: wrap;
-        background-color: #343a40;
+        background-color: #ff600ae3;
         color: white;
         padding: 40px 20px;
         border-top: 5px solid #ffcc00; /* Gold border for emphasis */
@@ -25,8 +25,8 @@
 
     .footer-logo h2 {
         margin-bottom: 15px;
-        font-size: 1.8rem;
-        color: #ffcc00; /* Gold color for the logo */
+        font-size: 2rem; 
+        color: #fff; /* Gold color for the logo */
     }
 
     .footer-logo iframe {

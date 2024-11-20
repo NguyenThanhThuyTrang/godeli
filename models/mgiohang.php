@@ -10,9 +10,9 @@ class CartModel {
     }   
 
     public function laySPtrongGioHang($makh) {  
-        $sql = "SELECT g.soluong, g.dongia, m.tenma, m.giaban   
+        $sql = "SELECT g.soluong, g.dongia, m.tenma, m.giaban, m.hinhanh   
                 FROM giohang g  
-                JOIN monan m ON g.mama = m.mama  
+                JOIN monan m ON g.mama = m.mama 
                 WHERE g.makh = ?";  
         
         $stmt = $this->conn->prepare($sql);  
@@ -29,7 +29,8 @@ class CartModel {
                     'tenma' => $row['tenma'], 
                     'giaban' => $row['giaban'], 
                     'soluong' => 0, 
-                    'dongia' => $row['dongia'], 
+                    'dongia' => $row['dongia'],
+                    'hinhanh' => $row['hinhanh'], 
                 ];  
             }   
             $items[$mama]['soluong'] += $row['soluong'];  

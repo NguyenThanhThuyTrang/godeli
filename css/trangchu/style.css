@@ -1,90 +1,10 @@
-/* Tổng thể */  
-body {  
-    font-family: Arial, sans-serif;  
-    margin: 0;  
-    padding: 0;  
-    background-color: #f0f0f0; 
-    padding-top: 90px; 
-}  
-
-/* Container */  
-.container {  
-    display: flex;  
-    max-width: 1200px;  
-    margin: 0 auto;    
-}  
-
-/* Sidebar */  
-.sidebar {  
-    width: 200px;  
-    padding-right: 20px;  
-}  
-
-
-.sidebar h2 {  
-    margin-top: 0;  
-    font-weight: bold;  
-    color: #ff5e24;  
-}  
-
-.sidebar ul {  
-    list-style-type: none;  
-    padding: 0;  
-}  
-
-.sidebar li {  
-    margin-bottom: 5px;  
-    background-color: #fff;  
-    border-radius: 10px;  
-    cursor: pointer;  
-    transition: background-color 0.3s, color 0.3s;  
-}  
-
-.category-button {  
-    display: block;  
-    width: 100%;  
-    margin-bottom: 10px;  
-    font-size: 16px;  
-    color: #333;  
-    background-color: white;  
-    border-radius: 10px;  
-    text-align: left;  
-    transition: all 0.3s ease;  
-    border: none;  
-    padding: 8px 0px;  
-}  
-
-#category-list li a {  
-    border-radius: 10px;  
-    font-weight: bold;  
-    text-decoration: none;  
-    padding-left: 10px;  
-    color: #ff7f50;  
-}  
-
-.category-button:hover {  
-    background-color: #ff7f50;  
-}  
-
-#category-list li a:hover {  
-    color: white;  
-}  
-
-/* Content */  
-.content {  
-    padding: 0 20px;
-    flex: 1;  
-    display: flex; 
-    flex-wrap: wrap;  
-    gap: 25px;  
-    justify-content: space-between; /* Đảm bảo các item bắt đầu từ bên trái */
+body{
+    padding-top: 75px;
 }
- 
-
-/* Recipe Card */  
+.product-grid {
+    gap: 3rem !important;
+}
 .recipe-card {
-    flex: 1 1 calc(33.3333% - 20px); /* Điều chỉnh kích thước cơ bản và khoảng cách */
-    max-width: calc(32% - 20px); /* Đảm bảo kích thước tối đa */
     background-color: white;  
     border-radius: 10px;  
     overflow: hidden;  
@@ -97,12 +17,6 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 25px; /* Đảm bảo khoảng cách giữa các hàng */
 } 
-
-.content::after {
-    content: '';
-    flex: 1 1 calc(30% - 20px); /* Điều chỉnh kích thước cơ bản và khoảng cách */
-    max-width: calc(32% - 20px); /* Đảm bảo kích thước tối đa */
-}
 
 .recipe-card:hover {  
     transform: scale(1.02);  
@@ -159,8 +73,6 @@ a {
 a:hover {
     text-decoration: none;
 }
-
-
 
 /* Overlay styling */  
 .product-overlay {  
@@ -273,6 +185,37 @@ a:hover {
     font-weight: bold;  
 }
 
+.new-products .title-newproducts {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 25px !important;
+    color: #ff5e24 !important;
+}
+
+.btn-xem-all{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-all-button{
+    font-size: 17px;
+    color: #ff5e24 !important;
+    font-weight: bold;
+    background-color: #fff; 
+    border: 2px solid #ff7f50;  
+    padding: 8px 25px;  
+    border-radius: 10px;  
+    color: white;  
+    cursor: pointer;  
+    width: auto;  
+}
+
+.view-all-button:hover {
+    background-color: #ff5e24;
+    color: #fff !important;
+}
+
 .background-header{
     width: 100%;
     height: 475px;
@@ -286,5 +229,42 @@ a:hover {
     object-fit: cover;
 }
 
+.dots{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+}
+  
+.dots span{
+  border: 1px solid #000;
+  display: block;
+  width: 5px;
+  height: 5px;
+  padding: 5px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background-color: #ccc;
+  transition: background-color 0.3s ease;
+}
+  
+.dots span.active {
+    background-color: #ff5e24;
+    border: 1px solid #b43000;
+}
+  
+  
 .background-header-img.move-right {
-    animation: moveRight 1s forwards;
+animation: moveRight 1s forwards;
+}
+
+@keyframes moveRight {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }

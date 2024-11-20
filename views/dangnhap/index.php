@@ -2,7 +2,7 @@
     include("views/dangnhap/xuly.php");
 ?>  
 <head>
-  <link rel="stylesheet" href="js/assets/css/login.css" />
+  <link rel="stylesheet" href="js/assets/css/login.css?v=1" />
 </head>
 <body>
   <div class="app">

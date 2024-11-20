@@ -3,6 +3,11 @@
         <link rel="stylesheet" href="js/assets/css/login.css" />';
     include "handle.php";
 ?>
+<style>
+  body{
+    padding-top: 80px;
+  }
+</style>
   </head> 
   <body>
     <div class="app">

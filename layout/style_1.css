@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #ffffff;
+    padding-top: 100px;
 }
 .container {
     max-width: 1200px;

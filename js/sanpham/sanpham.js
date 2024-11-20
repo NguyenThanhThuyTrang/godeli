@@ -38,3 +38,37 @@ function closeProductDetails() {
     document.getElementById('productOverlay').style.display = 'none';
     document.getElementById('productDetailForm').style.display = 'none';
 }
+
+//banner list
+var images = ["images/banner1.jpg", "images/banner4.jpg","images/banner2.jpg", "images/banner3.jpg"];
+    var currentImageIndex = 0;
+    
+    function changeImage() {
+      var banner = document.getElementsByClassName("background-header-img")[0];
+      banner.src = images[currentImageIndex];
+    
+      var dots = document.getElementsByClassName("dots")[0];
+      var dotSpans = dots.getElementsByTagName("span");
+      for (var i = 0; i < dotSpans.length; i++) {
+        dotSpans[i].classList.remove("active");
+      }
+      dotSpans[currentImageIndex].classList.add("active");
+    
+      currentImageIndex++;
+      if (currentImageIndex >= images.length) {
+        currentImageIndex = 0;
+      }
+    }
+    
+    setInterval(changeImage, 2000);
+    
+    var dots = document.getElementsByClassName("dots")[0];
+    for (var i = 0; i < images.length; i++) {
+      var dot = document.createElement("span");
+      dot.setAttribute("onclick", "currentImageIndex = " + i + "; changeImage();");
+      dots.appendChild(dot);
+    }
+    
+    var firstDot = dots.getElementsByTagName("span")[0];
+    firstDot.classList.add("active");
+//end
