@@ -103,19 +103,28 @@ class SanPham {
                 throw new Exception('Số lượng sản phẩm không đủ');
             }
     
+            // Kiểm tra số lượng sản phẩm trong giỏ hàng của khách hàng
+            $sqlCartCheck = "SELECT SUM(soluong) as total FROM giohang WHERE mama = ? AND makh = ?";
+            $stmtCartCheck = $this->conn->prepare($sqlCartCheck);
+            $stmtCartCheck->bind_param("ii", $mama, $makh);
+            $stmtCartCheck->execute();
+            $resultCartCheck = $stmtCartCheck->get_result();
+            $rowCart = $resultCartCheck->fetch_assoc();
+    
+            // Tính số lượng sản phẩm còn lại trong kho
+            $soLuongConLai = $row['soluong'] - $rowCart['total'];
+    
+            if ($soLuongConLai == 0) {
+                throw new Exception('Sản phẩm đã vượt quá số lượng thêm vào giỏ hàng');
+            }
+    
             // Thêm sản phẩm vào giỏ hàng
             $sql = "INSERT INTO giohang (mama, soluong, dongia, makh) VALUES (?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("iiii", $mama, $soluong, $dongia, $makh);
             $stmt->execute();
     
-            // Cập nhật số lượng sản phẩm trong bảng monan
-            $sqlUpdate = "UPDATE monan SET soluong = soluong - ? WHERE mama = ?";
-            $stmtUpdate = $this->conn->prepare($sqlUpdate);
-            $stmtUpdate->bind_param("ii", $soluong, $mama);
-            $stmtUpdate->execute();
-    
-            $this->conn->commit(); // Xác nhận giao dịch
+            $this->conn->commit();
             return true;
         } catch (Exception $e) {
             $this->conn->rollback(); // Hoàn tác giao dịch nếu có lỗi
