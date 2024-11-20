@@ -114,7 +114,7 @@ class SanPham {
             // Tính số lượng sản phẩm còn lại trong kho
             $soLuongConLai = $row['soluong'] - $rowCart['total'];
     
-            if ($soLuongConLai == 0) {
+            if ($soLuongConLai < $soluong) {
                 throw new Exception('Sản phẩm đã vượt quá số lượng thêm vào giỏ hàng');
             }
     
