@@ -61,7 +61,7 @@ class mUser {
 
     // Kiểm tra mật khẩu
     public function verifyPassword($tennd, $matkhau) {
-        $query = "SELECT * FROM khachhang WHERE tennd = ? AND matkhau = ?";
+        $query = "SELECT * FROM khachhang WHERE email = ? AND matkhau = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("ss", $tennd, $matkhau);
     
