@@ -1,7 +1,8 @@
 <?php
 session_start();
 include 'controller/csanpham.php'; 
-echo '<link rel="stylesheet" href="css/trangchu/style.css?v=3">';
+echo '<link rel="stylesheet" href="css/trangchu/style.css?v=2">';
+echo '<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">';
 
 $controllers = new CSanPham();
 
@@ -30,24 +31,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     }
 }
 ?>
-
+<style>
+</style>
 <main>
-    <!-- banner -->
-    <div class="background-header">
+    <!-- Banner -->
+    <div class="background-header" data-aos="fade-up" data-aos-duration="1200">
         <a href="index.php?page=sanpham"><img class="background-header-img" src="images/banner1.jpg" alt=""></a>
         <div class="dots"></div>
     </div>
 
-    <!-- sản phẩm mới -->
-    <section class="products container">
+<!-- Quảng cáo -->
+<section class="ads-section" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="300">
+    <div class="ads-content">
+        <a href="index.php?page=sanpham&search=gà+rán+combo" class="ad-link">
+            <img src="images/ad4.jpg" alt="Ad 1" class="ad-image">
+        </a>
+        <a href="index.php?page=sanpham&search=g%C3%A0+r%C3%A1n+cay" class="ad-link">
+            <img src="images/ad2.jpg" alt="Ad 2" class="ad-image">
+        </a>
+        <a href="index.php?page=sanpham&search=combo+%C4%91%E1%BA%B7t+bi%E1%BB%87t" class="ad-link">
+            <img src="images/ad3.jpg" alt="Ad 3" class="ad-image">
+        </a>
+        <a href="index.php?page=sanpham&category=Khoai%20Tây%20Chiên" class="ad-link">
+            <img src="images/ad5.jpg" alt="Ad 4" class="ad-image">
+        </a>
+        <a href="index.php?page=sanpham&category=Combo" class="ad-link">
+            <img src="images/ad6.jpg" alt="Ad 5" class="ad-image">
+        </a>
+    </div>
+</section>
+
+
+   <!-- Sản phẩm mới -->
+   <section class="products container" data-aos="fade-up" data-aos-duration="1200">
         <div class="new-products">
             <h3 class="title-newproducts">SẢN PHẨM MỚI NHẤT</h3>
             <div class="product-grid">
+                <!-- Lặp qua các sản phẩm -->
                 <?php
                 if (!empty($sanPhamMoi)) {
                     foreach ($sanPhamMoi as $sp) {
                         echo '
-                        <div class="recipe-card">
+                        <div class="recipe-card" data-aos="flip-left" data-aos-duration="1000">
                             <a href="#" class="product-link" data-mama="' . $sp['mama'] . '" data-tenma="' . $sp['tenma'] . '" data-hinhanh="' . $sp['hinhanh'] . '" data-giaban="' . $sp['giaban'] . '">
                                 <img src="images/' . $sp['hinhanh'] . '" alt="' . $sp['tenma'] . '" class="recipe-image">
                                 <div class="recipe-info">
@@ -55,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                                     <div class="recipe-meta">
                                         <b><span>' . number_format($sp['giaban'], 0, ',', '.') . ' VND</span></b>
                                     </div>
-                                    <br>
                                 </div>
                             </a>
                         </div>';
@@ -66,12 +90,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 ?>
             </div>
             <div class="btn-xem-all">
-            <button type="button" class="view-all-button" onclick="window.location.href='index.php?page=sanpham';">Xem tất cả</button>
+                <button type="button" class="view-all-button" onclick="window.location.href='index.php?page=sanpham';">Xem tất cả</button>
             </div>
         </div>
     </section>
 
-    <section class="products container">
+    <section class="products container" data-aos="fade-up" data-aos-duration="1200">
         <div class="new-products">
             <h3 class="title-newproducts">COMBO BÙNG NỔ</h3>
             <div class="product-grid">
@@ -79,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 if (!empty($sanPhamCombo)) {
                     foreach ($sanPhamCombo as $sp) {
                         echo '
-                        <div class="recipe-card">
+                        <div class="recipe-card" data-aos="flip-left">
                             <a href="#" class="product-link" data-mama="' . $sp['mama'] . '" data-tenma="' . $sp['tenma'] . '" data-hinhanh="' . $sp['hinhanh'] . '" data-giaban="' . $sp['giaban'] . '">
                                 <img src="images/' . $sp['hinhanh'] . '" alt="' . $sp['tenma'] . '" class="recipe-image">
                                 <div class="recipe-info">
@@ -96,26 +120,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 ?>
             </div>
             <div class="btn-xem-all">
-            <button type="button" class="view-all-button" onclick="window.location.href='index.php?page=sanpham&category=Combo';">Xem tất cả</button>
+                <button type="button" class="view-all-button" onclick="window.location.href='index.php?page=sanpham&category=Combo';">Xem tất cả</button>
             </div>
         </div>
     </section>
 
-    <!-- liên hệ đặt bàn  -->
-    <section class="hero container">
-        <div class="hero-content">
-            <h1><span>GoDeli</span></h1>
-            <h2>Cung cấp dịch vụ chuyên nghiệp</h2>
-            <p>Luôn lắng nghe, tiếp thu ý kiến của khách hàng với tinh thần cầu thị, nhân viên công ty luôn phục vụ bằng lương tâm và trách nhiệm.</p>
-            <a href="#" class="cta-button">Đặt bàn ngay</a>
-        </div>
-        <div class="hero-image">
-            <img src="images/blog-3.jpg?height=400&width=600" alt="Restaurant scene">
-        </div>
-    </section>
+    <section class="hero container" data-aos="zoom-in" data-aos-duration="1500">
+    <div class="hero-content">
+        <h1><span>GoDeli</span></h1>
+        <h2>Cung cấp dịch vụ chuyên nghiệp</h2>
+        <p>Luôn lắng nghe, tiếp thu ý kiến của khách hàng với tinh thần cầu thị, nhân viên công ty luôn phục vụ bằng lương tâm và trách nhiệm.</p>
+        <a href="#" class="cta-button">Đặt bàn ngay</a>
+    </div>
+    <div class="hero-image">
+        <img src="images/blog-3.jpg?height=400&width=600" alt="Restaurant scene">
+    </div>
+</section>
+
+
 
     <!-- modal chi tiết sản phẩm -->
-    <div class="product-overlay" id="productOverlay" onclick="closeProductDetails()"></div>
+<div class="product-overlay" id="productOverlay" onclick="closeProductDetails()"></div>
     <form class="product-detail-form" id="productDetailForm" style="display: none;" method="post">
         <span class="close-button" onclick="closeProductDetails()">×</span>  
         <div class="detail-content">  
@@ -136,6 +161,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             </div>  
         </div>  
     </form>
+
 </main>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        easing: 'ease-in-out', // Cài đặt hiệu ứng cuộn trang
+        duration: 1000, // Thời gian hiệu ứng
+        once: true, // Hiệu ứng chỉ xảy ra một lần
+    });
+</script>
+
+
 <script src="js/sanpham/sanpham.js"></script>
+
+
+
+
+
+
+
+
+
 

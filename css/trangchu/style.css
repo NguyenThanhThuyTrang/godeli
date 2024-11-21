@@ -1,5 +1,8 @@
 body{
     padding-top: 75px;
+    background-image: url('../../images/scratched-paper-texture.png') !important;
+    background-repeat: repeat;
+    z-index: 1;
 }
 .product-grid {
     gap: 3rem !important;
@@ -14,13 +17,13 @@ body{
     flex-direction: column;
     align-items: center;
     border: 1px solid #cfcfcf;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     margin-bottom: 25px; /* Đảm bảo khoảng cách giữa các hàng */
 } 
 
 .recipe-card:hover {  
     transform: scale(1.02);  
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);  
     border: 2px solid #ff7f50;
 }  
 
@@ -202,8 +205,8 @@ a:hover {
     font-size: 17px;
     color: #ff5e24 !important;
     font-weight: bold;
-    background-color: #fff; 
-    border: 2px solid #ff7f50;  
+    background-color: rgba(255, 255, 255, 0); 
+    border: 2px solid #ff4400;  
     padding: 8px 25px;  
     border-radius: 10px;  
     color: white;  
@@ -268,3 +271,123 @@ animation: moveRight 1s forwards;
       transform: translateX(100%);
     }
   }
+
+/* Quảng cáo */
+.ads-section {
+    margin: 50px 0;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.ads-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px;
+}
+
+.ad-image {
+    width: 100%;
+    max-width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    animation: zoomBounce 3s ease-in-out infinite, crescendo 0.5s alternate infinite ease-in;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.ad-link {
+    display: inline-block;
+    width: 15%;
+    text-decoration: none;
+}
+
+.ad-image:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
+}
+
+/* Zoom bounce keyframes */
+@keyframes zoomBounce {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+    }
+    50% {
+        transform: scale(1.1) translateY(-10px);
+    }
+}
+
+/* Crescendo sparkle effect */
+@keyframes crescendo {
+    0%   { transform: scale(1); filter: brightness(0.9); }
+    50%  { filter: brightness(1.3); }
+    75%  { filter: brightness(1); }
+    100% { transform: scale(1.03); filter: brightness(1.2); }
+}
+
+
+/* Staggered animation delays */
+.ad-image:nth-child(1) {
+    animation-delay: 0s;
+}
+.ad-image:nth-child(2) {
+    animation-delay: 0.3s;
+}
+.ad-image:nth-child(3) {
+    animation-delay: 0.6s;
+}
+.ad-image:nth-child(4) {
+    animation-delay: 0.9s;
+}
+.ad-image:nth-child(5) {
+    animation-delay: 1.2s;
+}
+
+.ad-image:hover {
+    transform: scale(1.12) !important;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Đảm bảo phần tử ban đầu bị ẩn đi */
+.recipe-card, .ads-section {
+    opacity: 0;
+    transform: translateY(50px); /* Di chuyển xuống dưới */
+    transition: all 1s ease-out;
+}
+
+/* Khi phần tử đã được hiển thị */
+[data-aos="fade-up"], [data-aos="fade-left"], [data-aos="flip-left"], [data-aos="zoom-in"] {
+    opacity: 1;
+    transform: translateY(0); /* Quay lại vị trí ban đầu */
+}
+
+/* Tạo hiệu ứng di chuyển nền khi cuộn */
+.hero-image {
+    background-size: cover;
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+}
+
+[data-aos="zoom-in"]:hover .hero-image {
+    transform: scale(1.05); /* Phóng to khi hover */
+}
+
+/* Tạo hiệu ứng parallax */
+.hero-image {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+    width: 100%;
+}
+
+/* Tạo chuyển động mượt mà cho các sản phẩm */
+.recipe-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.recipe-card:hover {
+    transform: translateY(-10px); /* Di chuyển lên một chút khi hover */
+}

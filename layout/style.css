@@ -2,7 +2,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-image: url('../images/scratched-paper-texture.png') !important;
+    background-repeat: repeat;
+}
+.background-header{
+    border-bottom: 3px solid #f97316;
 }
 .container {
     max-width: 1200px;
@@ -28,7 +32,7 @@ nav {
     padding: 1rem 0;
 }
 nav a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: #333;
     font-weight: 600;
     margin-right: 1rem;
@@ -40,6 +44,7 @@ nav a:hover {
     color: #f97316;
     font-size: 20px;
     transform: translateY(-5px);
+    text-decoration: none !important;
 }
 
 

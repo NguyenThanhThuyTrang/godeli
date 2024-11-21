@@ -89,7 +89,7 @@ class SanPham {
     }
 
     public function themVaoGioHang($mama, $soluong, $dongia, $makh) {
-        $this->conn->begin_transaction(); // Bắt đầu giao dịch
+        $this->conn->begin_transaction();
         try {
             // Kiểm tra số lượng sản phẩm trong kho
             $sqlCheck = "SELECT soluong FROM monan WHERE mama = ?";
@@ -98,11 +98,7 @@ class SanPham {
             $stmtCheck->execute();
             $resultCheck = $stmtCheck->get_result();
             $row = $resultCheck->fetch_assoc();
-    
-            if ($row['soluong'] < $soluong) {
-                throw new Exception('Số lượng sản phẩm không đủ');
-            }
-    
+
             // Kiểm tra số lượng sản phẩm trong giỏ hàng của khách hàng
             $sqlCartCheck = "SELECT SUM(soluong) as total FROM giohang WHERE mama = ? AND makh = ?";
             $stmtCartCheck = $this->conn->prepare($sqlCartCheck);
@@ -127,8 +123,8 @@ class SanPham {
             $this->conn->commit();
             return true;
         } catch (Exception $e) {
-            $this->conn->rollback(); // Hoàn tác giao dịch nếu có lỗi
-            return $e->getMessage(); // Trả về thông báo lỗi
+            $this->conn->rollback();
+            return $e->getMessage();
         }
     }
 
