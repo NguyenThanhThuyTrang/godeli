@@ -17,13 +17,13 @@ body{
     flex-direction: column;
     align-items: center;
     border: 1px solid #cfcfcf;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(255, 144, 104, 0.5);
     margin-bottom: 25px; /* Đảm bảo khoảng cách giữa các hàng */
 } 
 
 .recipe-card:hover {  
     transform: scale(1.02);  
-    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);  
+    box-shadow: 0 8px 16px rgba(255, 127, 80, 0.5);  
     border: 2px solid #ff7f50;
 }  
 
@@ -189,11 +189,15 @@ a:hover {
 }
 
 .new-products .title-newproducts {
+    font-weight: bold;
     text-align: center;
     margin-bottom: 30px;
     font-size: 25px !important;
-    color: #ff5e24 !important;
+    color: #ff8c3f !important; /* Màu cam chính */
+    text-shadow: 0px 0px 1px #ba2f00, /* Viền cam đậm hơn nhẹ */
+                 0px 0px 0.5px #6c1b00; /* Hiệu ứng mờ vừa đủ */
 }
+
 
 .btn-xem-all{
     display: flex;
@@ -203,10 +207,10 @@ a:hover {
 
 .view-all-button{
     font-size: 17px;
-    color: #ff5e24 !important;
+    color: #ff8c3f !important;
     font-weight: bold;
     background-color: rgba(255, 255, 255, 0); 
-    border: 2px solid #ff4400;  
+    border: 2px solid #ff8c3f;  
     padding: 8px 25px;  
     border-radius: 10px;  
     color: white;  
@@ -215,7 +219,7 @@ a:hover {
 }
 
 .view-all-button:hover {
-    background-color: #ff5e24;
+    background-color: #ff8c3f;
     color: #fff !important;
 }
 
@@ -276,11 +280,11 @@ animation: moveRight 1s forwards;
 .ads-section {
     margin: 50px 0;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0);
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(255, 187, 162, 0.5);
     text-align: center;
-}
+}   
 
 .ads-content {
     display: flex;

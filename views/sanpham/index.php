@@ -1,6 +1,6 @@
 <?php
 session_start();
-echo '<link rel="stylesheet" href="css/sanpham/style.css?v=2">';
+echo '<link rel="stylesheet" href="css/sanpham/style.css?v=1">';
 echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">';
 include 'controller/csanpham.php'; 
 
