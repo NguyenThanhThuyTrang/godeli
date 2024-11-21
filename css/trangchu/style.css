@@ -192,26 +192,28 @@ a:hover {
     font-weight: bold;
     text-align: center;
     margin-bottom: 30px;
-    font-size: 25px !important;
-    color: #ff8c3f !important; /* Màu cam chính */
-    text-shadow: 0px 0px 1px #ba2f00, /* Viền cam đậm hơn nhẹ */
-                 0px 0px 0.5px #6c1b00; /* Hiệu ứng mờ vừa đủ */
+    font-size: 30px !important;
+    color: #ff6600 !important; /* Màu cam chính */
+    text-shadow: 1px 1px 1px #9b2700, /* Viền cam đậm hơn nhẹ */
+                -20px -10px 25px #ffc8b6; /* Hiệu ứng mờ vừa đủ */
 }
 
 
 .btn-xem-all{
     display: flex;
-    align-items: center;
+    align-items: center;    
     justify-content: center;
 }
 
 .view-all-button{
+    margin-top: 15px;
     font-size: 17px;
-    color: #ff8c3f !important;
+    color: #ff6600 !important;
     font-weight: bold;
     background-color: rgba(255, 255, 255, 0); 
-    border: 2px solid #ff8c3f;  
-    padding: 8px 25px;  
+    border: 2px solid #ff6600; 
+    border-bottom: 4px solid #ff6600; 
+    padding: 8px 30px;  
     border-radius: 10px;  
     color: white;  
     cursor: pointer;  
@@ -221,6 +223,8 @@ a:hover {
 .view-all-button:hover {
     background-color: #ff8c3f;
     color: #fff !important;
+    border-color: #cd5505;
+    border-bottom: 4px solid #cd5505; 
 }
 
 .background-header{

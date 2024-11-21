@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'controller/csanpham.php'; 
-echo '<link rel="stylesheet" href="css/trangchu/style.css?v=2">';
+echo '<link rel="stylesheet" href="css/trangchu/style.css?v=1">';
 echo '<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">';
 
 $controllers = new CSanPham();
