@@ -10,7 +10,7 @@ class CartModel {
     }   
 
     public function laySPtrongGioHang($makh) {  
-        $sql = "SELECT g.soluong, g.dongia, m.tenma, m.giaban, m.hinhanh   
+        $sql = "SELECT g.soluong, g.dongia, m.tenma, m.giaban, m.hinhanh,g.mama   
                 FROM giohang g  
                 JOIN monan m ON g.mama = m.mama 
                 WHERE g.makh = ?";  
@@ -26,6 +26,7 @@ class CartModel {
             $mama = $row['tenma'];
             if (!isset($items[$mama])) {  
                 $items[$mama] = [  
+                    'mama' => $row['mama'],
                     'tenma' => $row['tenma'], 
                     'giaban' => $row['giaban'], 
                     'soluong' => 0, 
@@ -39,5 +40,29 @@ class CartModel {
         $stmt->close();  
         return array_values($items);  
     }  
+
+
+
+    public function xoaSanPhamKhoiGio($mama, $makh) {
+        $sql = "DELETE FROM giohang WHERE mama = ? AND makh = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ii", $mama, $makh);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    
+    public function capNhatSoLuong($mama, $soluong, $makh) {
+        $sql = "UPDATE giohang SET soluong = ? WHERE mama = ? AND makh = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("iii", $soluong, $mama, $makh);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+    
+    
+    
 }  
 ?>

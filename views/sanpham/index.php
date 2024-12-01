@@ -2,6 +2,7 @@
 session_start();
 echo '<link rel="stylesheet" href="css/sanpham/style.css?v=1">';
 echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">';
+echo '<link rel="stylesheet" href="styles.css">'; // Thêm CSS tùy chỉnh cho thông báo
 include 'controller/csanpham.php'; 
 
 $controllers = new CSanPham(); 
@@ -17,6 +18,8 @@ if (isset($_GET['category']) && $_GET['category'] !== 'all') {
     $tatCaSanPham = $controllers->layTatCaSanPham();
 }
 
+$notification = ''; // Biến thông báo
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $mama = $_POST['mama'];
     $soluong = $_POST['soluong'];
@@ -24,18 +27,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $makh = $_SESSION['makh'] ?? null;
 
     if (!$makh) {
-        echo '<script>
-                alert("Bạn phải đăng nhập để tiếp tục đặt món!");
-                window.location.href = "index.php?page=dangnhap";
-              </script>';
+        $notification = 'Bạn phải đăng nhập để tiếp tục đặt món!';
+        echo '<script>setTimeout(function(){ showNotification(); }, 100);</script>';
         exit;
     } elseif ($mama && $soluong > 0 && $dongia > 0) {
         $result = $controllers->themVaoGioHang($mama, $soluong, $dongia, $makh);
         if ($result === true) {
-            echo '<script>alert("Sản phẩm đã được thêm vào giỏ hàng thành công!");</script>';
+            $notification = 'Sản phẩm đã được thêm vào giỏ hàng thành công!';
         } else {
-            echo '<script>alert("' . $result . '");</script>';
+            $notification = $result;
         }
+        echo '<script>setTimeout(function(){ showNotification(); }, 100);</script>';
     }
 }
 ?>
@@ -45,24 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             <div class="sidebar">
                 <h2>Lọc món ăn</h2>
                 <ul id="category-list">
-                    <li>
-                        <a href="index.php?page=sanpham&category=all" class="category-button">All</a>
-                    </li>
-                    <li>
-                        <a href="index.php?page=sanpham&category=Gà Rán" class="category-button">Gà rán</a>
-                    </li>
-                    <li>
-                        <a href="index.php?page=sanpham&category=Nước Ngọt" class="category-button">Nước ngọt</a>
-                    </li>
-                    <li>
-                        <a href="index.php?page=sanpham&category=Mì Ý" class="category-button">Mì ý</a>
-                    </li>
-                    <li>
-                        <a href="index.php?page=sanpham&category=Khoai Tây Chiên" class="category-button">Khoai tây chiên</a>
-                    </li>
-                    <li>
-                        <a href="index.php?page=sanpham&category=Combo" class="category-button">Combo</a>
-                    </li>
+                    <li><a href="index.php?page=sanpham&category=all" class="category-button">All</a></li>
+                    <li><a href="index.php?page=sanpham&category=Gà Rán" class="category-button">Gà rán</a></li>
+                    <li><a href="index.php?page=sanpham&category=Nước Ngọt" class="category-button">Nước ngọt</a></li>
+                    <li><a href="index.php?page=sanpham&category=Mì Ý" class="category-button">Mì ý</a></li>
+                    <li><a href="index.php?page=sanpham&category=Khoai Tây Chiên" class="category-button">Khoai tây chiên</a></li>
+                    <li><a href="index.php?page=sanpham&category=Combo" class="category-button">Combo</a></li>
                 </ul>
             </div>
             <div class="content" id="product-list">
@@ -109,6 +99,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         </div>  
     </form>
 
+    <div id="notification" class="notification" style="display: none;">
+        <?php echo $notification; ?>
+    </div>
+
+    <script>
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+
+    <style>
+        .notification {
+            position: fixed;
+            top: 50%; /* Đặt ở giữa theo chiều dọc */
+            left: 50%; /* Đặt ở giữa theo chiều ngang */
+            transform: translate(-50%, -50%); /* Dịch chuyển để căn giữa */
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.5s;
+            z-index: 1000; /* Đảm bảo thông báo nằm trên các phần khác */
+        }
+    </style>
 </body>
 <script src="js/sanpham/sanpham.js"></script>
 </html>

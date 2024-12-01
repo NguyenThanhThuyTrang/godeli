@@ -28,7 +28,10 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
             <div class="nav">
                 <a href="index.php?page=trangchu">Trang chủ</a>
                 <a href="index.php?page=sanpham">Thực đơn</a>
-                <a href="index.php?page=giohang">Giỏ hàng <span class="button-icon"><i class="fa fa-cart-plus"></i> <sup>+</sup> <sup id="cart" name="cart">0</sup></span></a>
+                <a href="index.php?page=giohang" class="cart-icon" style="text-decoration: none;">
+                    Giỏ hàng
+                    <i class="fa fa-cart-plus"></i> 
+                </a>
             </div>
             <div class="search-container">
                 <form action="index.php" method="get">
@@ -39,7 +42,7 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
             </div>
             <div class="nav">
                 <?php
-                    if (isset($_SESSION["dn"]) && $_SESSION["dn"]) {
+                    if (isset($_SESSION["login"]) && $_SESSION["login"]) {
                         echo '<a href="#" id="logoutButton" style="text-decoration: none; padding: 0;"> <i class="fas fa-sign-out-alt"></i> Đăng xuất</a>';
                     } else {
                         echo '<a href="index.php?page=dangky" style="text-decoration: none; margin-left: 20px;"> <i class="fas fa-user-plus"></i> Đăng ký</a>/';
