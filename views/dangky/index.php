@@ -20,7 +20,7 @@
           <h1>Đăng ký</h1>
           <form method="post">
             <div class="form-control">
-              <input type="text" id="username" name="username" placeholder="Username" />
+              <input type="text" id="username" name="username" placeholder="Tên khách hàng" />
               <span></span>
               <small></small>
             </div>
@@ -30,17 +30,12 @@
               <small></small>
             </div>
             <div class="form-control">
-              <input type="password" id="password" name="password" placeholder="Password" />
+              <input type="password" id="password" name="password" placeholder="Mật khẩu" />
               <span></span>
               <small></small>
             </div>
             <div class="form-control">
-              <input
-                type="password"
-                id="confirm_password"
-                name="confirm_password"
-                placeholder="Confirm Password"
-              />
+              <input type="password" id="confirm_password" name="confirm_password" placeholder="Nhập lại mật khẩu"/>
               <span></span>
               <small></small>
             </div>
@@ -54,10 +49,10 @@
               style="background-color: orange";
             />
             <div class="signup_link">
-            <a href="login.html">Login Here!</a>
+            <a href="index.php?page=dangnhap">Đăng nhập</a>
             </div>
             <div class="signup_link" style="border-bottom: 1px solid gray">
-              Others <i class="fa-solid fa-arrow-down"></i>
+              
             </div>
             <div class="other_login">
               <a href="https://www.facebook.com/"

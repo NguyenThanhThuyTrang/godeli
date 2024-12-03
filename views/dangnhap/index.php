@@ -17,12 +17,12 @@
         <h1>Đăng nhập</h1>
         <form method="post">
           <div class="form-control">
-            <input type="text" name="username" placeholder="Username" />
+            <input type="text" name="username" placeholder="Tên đăng nhập" />
             <span></span>
             <small></small>
           </div>
           <div class="form-control">
-            <input type="password" name="password" placeholder="Password" />
+            <input type="password" name="password" placeholder="Mật khẩu" />
             <span></span>
             <small></small>
           </div>
@@ -31,7 +31,6 @@
           <a href="index.php?page=dangky">Đăng ký!</a>
           </div>
           <div class="signup_link" style="border-bottom: 1px solid gray">
-            Or <i class="fa-solid fa-arrow-down"></i>
           </div>
           <div class="other_login">
             <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i> Facebook</a>
