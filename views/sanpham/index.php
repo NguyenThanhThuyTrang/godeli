@@ -2,7 +2,7 @@
 session_start();
 echo '<link rel="stylesheet" href="css/sanpham/style.css?v=1">';
 echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">';
-echo '<link rel="stylesheet" href="styles.css">'; // Thêm CSS tùy chỉnh cho thông báo
+echo '<link rel="stylesheet" href="styles.css">'; 
 include 'controller/csanpham.php'; 
 
 $controllers = new CSanPham(); 
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     if (!$makh) {
         $notification = 'Bạn phải đăng nhập để tiếp tục đặt món!';
         echo '<script>setTimeout(function(){ showNotification(); }, 100);</script>';
-        exit;
+       
     } elseif ($mama && $soluong > 0 && $dongia > 0) {
         $result = $controllers->themVaoGioHang($mama, $soluong, $dongia, $makh);
         if ($result === true) {
