@@ -16,12 +16,15 @@ if (!isset($_SESSION['makh'])) {
     if (isset($_POST['update_quantity']) && isset($_POST['mama']) && isset($_POST['soluong'])) {
         $mama = (int)$_POST['mama'];
         $soluong = max((int)$_POST['soluong'], 1); // Đảm bảo số lượng >= 1
-        if ($c->CapNhatSoLuong($mama, $soluong, $makh)) {
+        $result = $c->CapNhatSoLuong($mama, $soluong, $makh);
+    
+        if ($result === true) {
             $notification = 'Cập nhật số lượng thành công!';
         } else {
-            $notification = 'Cập nhật số lượng thất bại!';
+            $notification = 'Lỗi: ' . $result; // Hiển thị thông báo lỗi
         }
     }
+    
 
     // Kiểm tra nếu có yêu cầu xóa sản phẩm
     if (isset($_GET['action']) && $_GET['action'] === 'del' && isset($_GET['id'])) {
