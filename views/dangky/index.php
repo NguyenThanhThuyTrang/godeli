@@ -19,26 +19,28 @@
         <div class="login__inner">
           <h1>Đăng ký</h1>
           <form method="post">
-            <div class="form-control">
-              <input type="text" id="username" name="username" placeholder="Tên khách hàng" />
-              <span></span>
-              <small></small>
-            </div>
-            <div class="form-control">
-              <input type="email" id="email" name="email" placeholder="Email" />
-              <span></span>
-              <small></small>
-            </div>
-            <div class="form-control">
-              <input type="password" id="password" name="password" placeholder="Mật khẩu" />
-              <span></span>
-              <small></small>
-            </div>
-            <div class="form-control">
-              <input type="password" id="confirm_password" name="confirm_password" placeholder="Nhập lại mật khẩu"/>
-              <span></span>
-              <small></small>
-            </div>
+          <div class="form-control">
+          <input type="text" id="username" name="username" placeholder="Tên khách hàng" />
+        </div>
+        <div class="form-control">
+          <input type="date" id="date" name="date" placeholder="Ngày sinh" />
+        </div>
+        <div class="form-control">
+          <input type="email" id="email" name="email" placeholder="Email" />
+        </div>
+        <div class="form-control">
+          <input type="text" id="number" name="sdt" placeholder="Số điện thoại" />
+        </div>
+        <div class="form-control">
+          <input type="text" id="text" name="text" placeholder="Địa chỉ" />
+        </div>
+        <div class="form-control">
+          <input type="password" id="password" name="password" placeholder="Mật khẩu" />
+        </div>
+        <div class="form-control">
+          <input type="password" id="confirm_password" name="confirm_password" placeholder="Nhập lại mật khẩu" />
+        </div>
+            
             <input
               type="submit"
               value="Đăng ký"
