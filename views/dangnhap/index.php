@@ -17,12 +17,12 @@
         <h1>Đăng nhập</h1>
         <form method="post">
           <div class="form-control">
-            <input type="text" name="username" placeholder="Tên đăng nhập" />
+            <input type="text" name="username" placeholder="Tên đăng nhập" required/>
             <span></span>
             <small></small>
           </div>
           <div class="form-control">
-            <input type="password" name="password" placeholder="Mật khẩu" />
+            <input type="password" name="password" placeholder="Mật khẩu" required/>
             <span></span>
             <small></small>
           </div>
