@@ -62,12 +62,6 @@ class CheckoutController {
         }
     }
     
-
-    // Cập nhật thông tin khách hàng
-    public function capNhatThongTinKhachHang($makh, $ten, $phone, $address, $email) {
-    return $this->model->capNhatThongTinKhachHang($makh, $ten, $phone, $address, $email);
-}
-
     
 }
 ?>

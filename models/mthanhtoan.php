@@ -104,14 +104,6 @@ class CheckoutModel {
     }
 
 
-        public function capNhatThongTinKhachHang($makh, $ten, $phone, $address, $email) {
-        $sql = "UPDATE khachhang SET tennd = ?, sodienthoai = ?, diachi = ?, email = ? WHERE makh = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssssi", $ten, $phone, $address, $email, $makh);
-        $stmt->execute();
-        $stmt->close();
-    }
-
     
 }
 ?>
