@@ -59,15 +59,15 @@ class CheckoutModel {
     }
 
     public function taoDonHang($makh, $mach, $tongtien, $ghichu, $giohang, $ten, $phone, $address, $email) {
-        $this->conn->begin_transaction();
+        $this->conn->begin_transaction();//thao tác phải oke mới commit được
         try {
-            // Lưu thông tin đơn hàng, bao gồm người nhận hàng
+            
             $sqlDonHang = "INSERT INTO donhang (ngaydat, mattdh, makh, mach, tennguoinhan, sdtnguoinhan, diachinguoinhan, emailnguoinhan) 
                            VALUES (NOW(), 1, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sqlDonHang);
             $stmt->bind_param("iissss", $makh, $mach, $ten, $phone, $address, $email);
             $stmt->execute();
-            $madh = $stmt->insert_id;
+            $madh = $stmt->insert_id;// lấy id nó
     
             // Thêm chi tiết đơn hàng
             $sqlChiTiet = "INSERT INTO chitietdonhang (madh, mama, soluong, dongia, giamgia, ghichu) VALUES (?, ?, ?, ?, ?, ?)";
@@ -87,7 +87,7 @@ class CheckoutModel {
                 $stmtChiTiet->execute();
             }
     
-            $this->conn->commit();
+            $this->conn->commit();//commit nè
             return $madh;
         } catch (Exception $e) {
             $this->conn->rollback();

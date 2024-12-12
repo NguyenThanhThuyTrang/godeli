@@ -5,7 +5,7 @@ class CheckoutController {
     private $model;  
 
     public function __construct() {  
-        $this->model = new CheckoutModel();  // Kết nối với CheckoutModel
+        $this->model = new CheckoutModel(); 
     }  
 
     // Hiển thị sản phẩm trong giỏ hàng theo mã khách hàng

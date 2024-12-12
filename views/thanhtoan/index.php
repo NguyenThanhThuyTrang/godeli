@@ -52,32 +52,35 @@
   $danhSachCuaHang = $checkoutController->layDanhSachCuaHang();
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $ten = $_POST['name'];
-      $phone = $_POST['phone'];
-      $address = $_POST['address'];
-      $email = $_POST['email'];
-      $mach = $_POST['branch'];
-      $ghichu = $_POST['note'];
-      $tongtien = $_POST['tongtien'];
+    $ten = $_POST['name'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $email = $_POST['email'];
+    $mach = $_POST['branch'];
+    $ghichu = $_POST['note'];
+    $tongtien = $_POST['tongtien'];
 
-      if (empty($ten) || empty($phone) || empty($address)) {
-          echo "<div class='notification error'>Vui lòng điền đầy đủ thông tin!</div>";
-      } else {
-          $result = $checkoutController->taoDonHang($makh, $mach, $tongtien, $ghichu);
+    // Kiểm tra email hợp lệ
+    if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<div class='notification error'>Địa chỉ email không hợp lệ!</div>";
+    } elseif (empty($ten) || empty($phone) || empty($address)) {
+        echo "<div class='notification error'>Vui lòng điền đầy đủ thông tin!</div>";
+    } else {
+        $result = $checkoutController->taoDonHang($makh, $mach, $tongtien, $ghichu);
 
-          if ($result['status']) {
-              echo "<div class='notification success'>{$result['message']}</div>";
-          } else {
-              echo "<div class='notification error'>{$result['message']}</div>";
-          }
+        if ($result['status']) {
+            echo "<div class='notification success'>{$result['message']}</div>";
+        } else {
+            echo "<div class='notification error'>{$result['message']}</div>";
+        }
 
-          echo "<script>
-                  setTimeout(function() {
-                      window.location.href = 'index.php?page=trangchu';
-                  }, 3000);
-                </script>";
-      }
-  }
+        echo "<script>
+                setTimeout(function() {
+                    window.location.href = 'index.php?page=trangchu';
+                }, 5000);
+              </script>";
+    }
+}
   ?>
 
   <div class="container">
