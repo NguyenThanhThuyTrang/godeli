@@ -17,7 +17,7 @@
         <h1>Đăng nhập</h1>
         <form method="post">
           <div class="form-control">
-            <input type="text" name="username" placeholder="Tên đăng nhập" required/>
+            <input type="text" name="username" placeholder="Email" required/>
             <span></span>
             <small></small>
           </div>

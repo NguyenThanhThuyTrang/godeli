@@ -18,6 +18,13 @@ if (isset($_GET['category']) && $_GET['category'] !== 'all') {
     $tatCaSanPham = $controllers->layTatCaSanPham();
 }
 
+// Kiểm tra nếu không tìm thấy sản phẩm
+if (empty($tatCaSanPham)) {
+    echo "<script>
+    alert('Không tìm thấy sản phẩm nào.');
+</script>";
+}
+
 $notification = ''; // Biến thông báo
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
